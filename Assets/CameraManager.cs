@@ -6,19 +6,13 @@ using UnityEngine.VFX;
 public class CameraManager : MonoBehaviour
 {
     public Camera[] cameras;
+    public Canvas[] canvases;
 
     public enum Cams {
         Spinner = 0,
         Board = 1
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha9))
@@ -41,6 +35,17 @@ public class CameraManager : MonoBehaviour
         }
 
         cameras[(int)cam].gameObject.SetActive(true);
+        ChangeCanvas(cam);
+    }
+
+    public void ChangeCanvas(Cams cam)
+    {
+        foreach(var canvas in canvases)
+        {
+            canvas.gameObject.SetActive(false);
+        }
+
+        canvases[(int)cam].gameObject.SetActive(true);
     }
 
     public void SetSpinnerCamera()
