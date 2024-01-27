@@ -6,9 +6,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public SpinManager SpinManager;
+    public CameraManager CameraManager;
 
     private void Start()
     {
-        SpinManager = GetComponentInChildren<SpinManager>();
+
     }
 }
