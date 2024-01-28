@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,5 +35,16 @@ public class GameManager : MonoBehaviour
     public void Fail()
     {
         Debug.Log("Wow you failed, bro! Yo momma hates you!!");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Retry()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

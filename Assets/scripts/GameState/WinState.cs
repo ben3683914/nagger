@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FailState : IState
+public class WinState : IState
 {
     GameManager gm;
 
     public void Enter()
     {
         gm = GameManager.Instance;
-        Debug.Log("entered fail state");
-        gm.CameraManager.SetCamera(CameraManager.Cams.Fail);
+        Debug.Log("entered win state");
+        gm.CameraManager.SetCamera(CameraManager.Cams.Win);
 
     }
 

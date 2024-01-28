@@ -50,7 +50,7 @@ public class GuessManager : MonoBehaviour
     void Start()
     {
         GameManager.Instance.SpinManager.OnNeedleHit.AddListener(AddGuesses);
-
+        UpdateUI();
     }
 
     // call on enter to state

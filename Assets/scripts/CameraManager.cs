@@ -13,20 +13,21 @@ public class CameraManager : MonoBehaviour
 
     public enum Cams {
         Spinner = 0,
-        Board = 1
+        Board = 1,
+        Fail= 2,
+        Success= 3,
+        Win = 4
     }
+
+    public Cams _selectedCam;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            if(Camera.main == cameras[(int)Cams.Spinner])
-            {
-                GameManager.Instance.GameState.ChangeState(new BoardState());
-                return;
-            }
+            var nextCam = ((int)_selectedCam % 5) + 1;
 
-            GameManager.Instance.GameState.ChangeState(new SpinnerState());
+            GameManager.Instance.GameState.ChangeState(CreateState(nextCam));
         }
     }
 
@@ -39,6 +40,7 @@ public class CameraManager : MonoBehaviour
         }
 
         cameras[(int)cam].gameObject.SetActive(true);
+        _selectedCam = cam;
         ChangeCanvas(cam);
     }
 
@@ -50,6 +52,19 @@ public class CameraManager : MonoBehaviour
         }
 
         canvases[(int)cam].gameObject.SetActive(true);
+    }
+
+    public IState CreateState(int stateId)
+    {
+        switch (stateId)
+        {
+            case (int)Cams.Spinner: return new SpinnerState();
+            case (int)Cams.Board: return new BoardState();
+            case (int)Cams.Fail: return new FailState();
+            case (int)Cams.Success: return new SuccessState();
+            case (int)Cams.Win: return new WinState();
+            default: return new SpinnerState();
+        }
     }
 
     void SetSpinnerCamera()
