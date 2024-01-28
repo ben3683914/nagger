@@ -17,7 +17,7 @@ public class GuessManager : MonoBehaviour
 
     public Phrase phrase;
     public int guesscount = 0;
-    private List<Phrase> NormalPhrases;
+    private List<Phrase> Phrases;
     private List<Phrase> SusPhrases;
     public TMP_Dropdown GuessDropdown;
     public UnityEngine.UI.Button Button;
@@ -92,6 +92,12 @@ public class GuessManager : MonoBehaviour
             AnswerText.text = answerString.ToString();
         }
 
+        if(phrase.Answer == AnswerText.ToString())
+        {
+            GameManager.Instance.LadderManager.NextPhrase();
+            return;
+        }
+
         guessList = guessList.Where(x => x != letter).ToArray();
     }
 
@@ -125,29 +131,33 @@ public class GuessManager : MonoBehaviour
 
     private void setPhrase(int index)
     {
-        phrase = NormalPhrases[index];
+        Phrase.PhraseType type = GameManager.Instance.LadderManager.GetCurrentPhraseType();
+        int tier = GameManager.Instance.LadderManager.CurrentTier;
+        phrase = GetNextPhrase(type, tier);
+        
         phrase.Answer = phrase.Answer.ToUpper();
         PromptText.text = phrase.Prompt; // i can't find the gameobject for this
     }
 
-    private int GetNextPhrase(Phrase.PhraseType type)
+    private Phrase GetNextPhrase(Phrase.PhraseType type, int tier)
     {
+        Phrase phrase;
         if(type == Phrase.PhraseType.Safe)
         {
-            // get next safe phrase
+            phrase = Phrases.Where(x => x.Type == Phrase.PhraseType.Safe && x.Tier == tier).First();
         }
         else
         {
-            // get next sus phrase
+            phrase = Phrases.Where(x => x.Type == Phrase.PhraseType.Sus && x.Tier == tier).First();
         }
-        return 0;
+        return phrase;
     }
 
     private void InitializePhrases()
     {
         var rand = new System.Random();
 
-        NormalPhrases = new List<Phrase> {
+        Phrases = new List<Phrase> {
             new Phrase("Fictional Characters","NICK FURY", 1),
             new Phrase("Fictional Characters","HOMER SIMPSON", 0),
             new Phrase("Fictional Characters","THE INCREDIBLE HULK", 1),
@@ -189,15 +199,10 @@ public class GuessManager : MonoBehaviour
             new Phrase("CITY", "CHICAGO", 0),
             new Phrase("CITY", "ATLANTA", 0),
             new Phrase("CITY", "LOS ANGELES", 1),
-        };
-
-
-        SusPhrases = new List<Phrase> {
             new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus),
             new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus)
         };
 
-        NormalPhrases = NormalPhrases.OrderBy(_ => rand.Next()).ToList();
-        SusPhrases = SusPhrases.OrderBy(_ => rand.Next()).ToList();
+        Phrases = Phrases.OrderBy(_ => rand.Next()).ToList();
     }
 }
