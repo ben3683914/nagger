@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class SpinnerState : IState
 {
+    GameManager gm;
+    SpinManager spinManager;
 
     public void Enter()
     {
+        gm = GameManager.Instance;
+        spinManager = GameManager.Instance.SpinManager;
+        if (!gm.NSFW)
+            spinManager.MakeSFW();
+
+
         Debug.Log("entered spinner state");
-        GameManager.Instance.CameraManager.SetCamera(CameraManager.Cams.Spinner);
+        gm.CameraManager.SetCamera(CameraManager.Cams.Spinner);
+        spinManager.Interactable();
     }
 
     public void Execute()
@@ -19,5 +28,6 @@ public class SpinnerState : IState
     public void Exit()
     {
         Debug.Log("exiting spinner state");
+        spinManager.Interactable(false);
     }
 }

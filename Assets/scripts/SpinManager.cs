@@ -10,6 +10,7 @@ public class SpinManager : MonoBehaviour
     public GameObject spinner;
     public Button button;
     public Needle needle;
+    public Sprite sfwNeedle;
 
     float rotSpeed = 2f;
     float[] durationRange = {1.5f, 5f};
@@ -22,6 +23,16 @@ public class SpinManager : MonoBehaviour
         duration = Random.Range(durationRange[0], durationRange[1]);
         //Debug.Log($"duration: {duration}");
         StartCoroutine(Spin(duration));
+    }
+
+    public void Interactable(bool toggle = true)
+    {
+        button.interactable = toggle;
+    }
+
+    public void MakeSFW()
+    {
+        button.GetComponent<SpriteRenderer>().sprite = sfwNeedle;
     }
 
     IEnumerator Spin(float duration)
@@ -37,8 +48,6 @@ public class SpinManager : MonoBehaviour
         }
 
         NeedleCheck();
-
-        button.interactable = true;
 
         yield return null;
     }

@@ -1246,6 +1246,7 @@ MonoBehaviour:
   spinner: {fileID: 660729958}
   button: {fileID: 825735534}
   needle: {fileID: 1609499239}
+  sfwNeedle: {fileID: 21300000, guid: 5fedcdcbdef2ef24a92028c907d172c1, type: 3}
 --- !u!1 &660729958
 GameObject:
   m_ObjectHideFlags: 0
@@ -4129,6 +4130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612086aeb9d9f5449a7cc3637930b967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnNextTier:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNextPhrase:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompletedTier:
+    m_PersistentCalls:
+      m_Calls: []
+  Tiers: 2
+  CurrentTier: 0
+  CurrentTierPhrase: 0
+  TierPhrases: 
 --- !u!1 &1716818250
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,6 +4172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6433f25e771fa4fbbed758d5a7aa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NSFW: 1
   SpinManager: {fileID: 594764390}
   CameraManager: {fileID: 460561291}
   GuessManager: {fileID: 224482531}

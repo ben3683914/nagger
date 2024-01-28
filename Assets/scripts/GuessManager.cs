@@ -163,7 +163,7 @@ public class GuessManager : MonoBehaviour
             new Phrase("New Slang", "On God", 1),
             new Phrase("Dance", "SALSA", 0),
             new Phrase("Dance", "THE JITTERBUG", 1),
-            new Phrase("Dance", "THE GRIDDIE",1),
+            new Phrase("Dance", "THE GRIDDIE", 1),
             new Phrase("Video Game", "MINECRAFT", 0),
             new Phrase("Video Game", "CALL OF DUTY", 0),
             new Phrase("Video Game", "AMONG US", 1),

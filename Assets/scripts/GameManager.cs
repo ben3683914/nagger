@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
         GameState = new GameState();
         GameState.ChangeState(new SpinnerState());
-        GameState.ChangeState(new BoardState());
     }
 
     private void Update()

@@ -7,7 +7,7 @@ public class LadderManager : MonoBehaviour
 {
     public UnityEvent<int, int> OnNextTier; // send an event with the current tier when we progress to the next tier
     public UnityEvent<int> OnNextPhrase; // send an event with the current tier when we progress to the next phrase
-    public UnityEvent OnCompletedTier;
+    public UnityEvent<int> OnCompletedTier; // send an event when you complete a tier
 
     public int Tiers = 2;
     public int CurrentTier = 0;
