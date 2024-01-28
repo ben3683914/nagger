@@ -242,7 +242,7 @@ public class GuessManager : MonoBehaviour
             new Phrase("CITY", "CHICAGO", 0),
             new Phrase("CITY", "ATLANTA", 0),
             new Phrase("CITY", "LOS ANGELES", 1),
-            new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus, "Nagger"),
+            new Phrase("People Who Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus, "Nagger"),
             new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus, "Maggots")
         };
     }
