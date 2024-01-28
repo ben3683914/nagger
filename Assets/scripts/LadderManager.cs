@@ -20,6 +20,18 @@ public class LadderManager : MonoBehaviour
         TierPhrases = new List<Phrase.PhraseType>() { Phrase.PhraseType.Safe, Phrase.PhraseType.Safe, Phrase.PhraseType.Safe, Phrase.PhraseType.Sus};
     }
 
+    public void NextPhrase()
+    {
+        if (CurrentTierPhrase >= TierPhrases.Count)
+        {
+            NextTier();
+            return;
+        }
+
+        CurrentTierPhrase++;
+        OnNextPhrase.Invoke(CurrentTier);
+    }
+
     public void NextTier()
     {
         if (CurrentTier >= Tiers)
@@ -32,18 +44,6 @@ public class LadderManager : MonoBehaviour
         CurrentTierPhrase = 0;
 
         OnNextTier.Invoke(CurrentTier, CurrentTierPhrase);
-    }
-
-    public void NextPhrase()
-    {
-        if(CurrentTierPhrase >= TierPhrases.Count)
-        {
-            NextTier();
-            return;
-        }
-
-        CurrentTierPhrase++;
-        OnNextPhrase.Invoke(CurrentTier);
     }
 
     public Phrase.PhraseType GetCurrentPhraseType()
