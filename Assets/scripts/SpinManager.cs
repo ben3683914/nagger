@@ -8,9 +8,12 @@ public class SpinManager : MonoBehaviour
 {
     public UnityEvent<int> OnNeedleHit;
     public GameObject spinner;
-    public Button button;
+    public Button spinButton;
+    public Button nsfwButton;
     public Needle needle;
+    public Sprite nsfwNeedle;
     public Sprite sfwNeedle;
+
 
     float rotSpeed = 2f;
     float[] durationRange = {1.5f, 5f};
@@ -27,17 +30,27 @@ public class SpinManager : MonoBehaviour
 
     public void Interactable(bool toggle = true)
     {
-        button.interactable = toggle;
+        spinButton.interactable = toggle;
     }
 
-    public void MakeSFW()
+    public void MakeNSFW()
     {
-        button.GetComponent<SpriteRenderer>().sprite = sfwNeedle;
+        if (GameManager.Instance.NSFW)
+        {
+            GameManager.Instance.NSFW = false;
+            needle.GetComponentInChildren<SpriteRenderer>().sprite = sfwNeedle;
+        }
+        else
+        {
+            GameManager.Instance.NSFW = true;
+            needle.GetComponentInChildren<SpriteRenderer>().sprite = nsfwNeedle;
+        }
+        
     }
 
     IEnumerator Spin(float duration)
     {
-        button.interactable = false;
+        spinButton.interactable = false;
         float t = 0f;
 
         while(t < duration)

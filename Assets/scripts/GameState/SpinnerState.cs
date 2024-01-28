@@ -11,9 +11,6 @@ public class SpinnerState : IState
     {
         gm = GameManager.Instance;
         spinManager = GameManager.Instance.SpinManager;
-        if (!gm.NSFW)
-            spinManager.MakeSFW();
-
 
         Debug.Log("entered spinner state");
         gm.CameraManager.SetCamera(CameraManager.Cams.Spinner);
@@ -22,7 +19,7 @@ public class SpinnerState : IState
 
     public void Execute()
     {
-        Debug.Log("executing spinner state");
+        //Debug.Log("executing spinner state");
     }
 
     public void Exit()
