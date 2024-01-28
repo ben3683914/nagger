@@ -22,11 +22,11 @@ public class CameraManager : MonoBehaviour
         {
             if(Camera.main == cameras[(int)Cams.Spinner])
             {
-                SetBoardCamera();
+                GameManager.Instance.GameState.ChangeState(new BoardState());
                 return;
             }
 
-            SetSpinnerCamera();
+            GameManager.Instance.GameState.ChangeState(new SpinnerState());
         }
     }
 
