@@ -40,17 +40,16 @@ public class LadderManager : MonoBehaviour
         CurrentTier++;
         CurrentTierIndex = 0;
 
-        if (CurrentTier >= Tiers)
-        {
-            GameManager.Instance.GameState.ChangeState(new WinState());
-            return;
-        }
-
         OnNextTier.Invoke(CurrentTier, CurrentTierIndex);
     }
 
     public Phrase.PhraseType GetCurrentPhraseType()
     {
         return TierPhrases[CurrentTierIndex];
+    }
+
+    public bool IsWinner()
+    {
+        return CurrentTierIndex >= TierPhrases.Count - 1 && CurrentTier + 1 >= Tiers;
     }
 }

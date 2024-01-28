@@ -47,4 +47,9 @@ public class GameManager : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
+
+    public void Continue()
+    {
+        LadderManager.NextPhrase();
+    }
 }

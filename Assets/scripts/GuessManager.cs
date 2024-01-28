@@ -97,8 +97,17 @@ public class GuessManager : MonoBehaviour
 
         if (phrase.Answer.ToUpper() == AnswerText.text.ToUpper())
         {
-            Debug.Log("Advance");
-            GameManager.Instance.LadderManager.NextPhrase();
+            if(GameManager.Instance.LadderManager.IsWinner())
+            {
+                Debug.Log("Win");
+                GameManager.Instance.GameState.ChangeState(new WinState());
+            }
+            else
+            {
+                Debug.Log("Advance");
+                GameManager.Instance.GameState.ChangeState(new SuccessState());
+            }
+            
             return;
         }
 
@@ -114,8 +123,12 @@ public class GuessManager : MonoBehaviour
         
         guesscount--;
 
-        UpdateUI();
+        if(guesscount == 0)
+        {
+            GameManager.Instance.GameState.ChangeState(new FailState());
+        }
 
+        UpdateUI();
         Button.interactable = true;
     }
 
