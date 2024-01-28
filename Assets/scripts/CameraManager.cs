@@ -5,8 +5,11 @@ using UnityEngine.VFX;
 
 public class CameraManager : MonoBehaviour
 {
-    public Camera[] cameras;
-    public Canvas[] canvases;
+    [SerializeField]
+    private Camera[] cameras;
+
+    [SerializeField]
+    private Canvas[] canvases;
 
     public enum Cams {
         Spinner = 0,
@@ -27,8 +30,9 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void ChangeCamera(Cams cam)
+    public void SetCamera(Cams cam)
     {
+        // there's an assumption that every camera will have a different UI canvas
         foreach(var c in cameras)
         {
             c.gameObject.SetActive(false);
@@ -38,7 +42,7 @@ public class CameraManager : MonoBehaviour
         ChangeCanvas(cam);
     }
 
-    public void ChangeCanvas(Cams cam)
+    void ChangeCanvas(Cams cam)
     {
         foreach(var canvas in canvases)
         {
@@ -48,13 +52,13 @@ public class CameraManager : MonoBehaviour
         canvases[(int)cam].gameObject.SetActive(true);
     }
 
-    public void SetSpinnerCamera()
+    void SetSpinnerCamera()
     {
-        ChangeCamera(Cams.Spinner);
+        SetCamera(Cams.Spinner);
     }
 
-    public void SetBoardCamera()
+    void SetBoardCamera()
     {
-        ChangeCamera(Cams.Board);
+        SetCamera(Cams.Board);
     }
 }

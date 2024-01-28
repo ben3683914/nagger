@@ -41,24 +41,26 @@ public class GuessManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        InitializePhrases();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        InitializePhrases();
         guessList = _guessList;
-        setPhrase(0);
-        AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
-        GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
-        UpdateUI();
-
         GameManager.Instance.SpinManager.OnNeedleHit.AddListener(AddGuesses);
 
     }
 
-    // Update is called once per frame
-    void Update()
+    // call on enter to state
+    public void StartPhrase(int tier)
     {
-
+        setPhrase(0);
+        AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
+        GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
+        UpdateUI();
     }
 
     public void AddGuesses(int guesses)
@@ -108,7 +110,20 @@ public class GuessManager : MonoBehaviour
     {
         phrase = NormalPhrases[index];
         phrase.Answer = phrase.Answer.ToUpper();
-        PromptText.text = phrase.Prompt;
+        PromptText.text = phrase.Prompt; // i can't find the gameobject for this
+    }
+
+    private int GetNextPhrase(Phrase.PhraseType type)
+    {
+        if(type == Phrase.PhraseType.Safe)
+        {
+            // get next safe phrase
+        }
+        else
+        {
+            // get next sus phrase
+        }
+        return 0;
     }
 
     private void InitializePhrases()
@@ -139,8 +154,8 @@ public class GuessManager : MonoBehaviour
             new Phrase("Person", "BARACK OBAMA", 0),
             new Phrase("Person","TAYLOR SWIFT", 0),
             new Phrase("Phrase","AHEAD OF THE GAME", 1),
-            new Phrase("Phrase","HAVING A GREEN THUMB", 2),
-            new Phrase("Phrase","ONCE IN A BLUE MOON", 2),
+            new Phrase("Phrase","HAVING A GREEN THUMB", 1),
+            new Phrase("Phrase","ONCE IN A BLUE MOON", 1),
             new Phrase("On The Map","PARK AVENUE", 1),
             new Phrase("On The Map","BRITISH COLUMBIA", 1),
             new Phrase("On The Map","LOUISVILLE KENTUCKY", 1),
@@ -151,17 +166,21 @@ public class GuessManager : MonoBehaviour
             new Phrase("Dance", "THE GRIDDIE",1),
             new Phrase("Video Game", "MINECRAFT", 0),
             new Phrase("Video Game", "CALL OF DUTY", 0),
-            new Phrase("Video Game", "AMONG US", 1)
+            new Phrase("Video Game", "AMONG US", 1),
+            new Phrase("CITY", "LOUISVILLE KENTUCKY", 1),
+            new Phrase("CITY", "NEW YORK CITY", 0),
+            new Phrase("CITY", "CHICAGO", 0),
+            new Phrase("CITY", "ATLANTA", 0),
+            new Phrase("CITY", "LOS ANGELES", 1),
         };
 
 
         SusPhrases = new List<Phrase> {
-            new Phrase("People That Annoy You","NAGGERS", 1),
-            new Phrase("Things That Gross You Out","LOUISVILLE KENTUCKY", 0) // lmao?
+            new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus),
+            new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus)
         };
 
         NormalPhrases = NormalPhrases.OrderBy(_ => rand.Next()).ToList();
         SusPhrases = SusPhrases.OrderBy(_ => rand.Next()).ToList();
-
     }
 }
