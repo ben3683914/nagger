@@ -49,7 +49,6 @@ public class GuessManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        guessList = _guessList;
         GameManager.Instance.SpinManager.OnNeedleHit.AddListener(AddGuesses);
 
     }
@@ -58,6 +57,7 @@ public class GuessManager : MonoBehaviour
     public void StartPhrase(int tier)
     {
         setPhrase(0);
+        guessList = _guessList;
         AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
         UpdateUI();
