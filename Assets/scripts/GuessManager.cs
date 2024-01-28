@@ -91,6 +91,8 @@ public class GuessManager : MonoBehaviour
             }
             AnswerText.text = answerString.ToString();
         }
+
+        guessList = guessList.Where(x => x != letter).ToArray();
     }
 
     public void Guess()
@@ -100,8 +102,6 @@ public class GuessManager : MonoBehaviour
 
         DoGuess(guessLetter);
         
-        guessList = guessList.Where(x => x != guessLetter).ToArray();
-
         guesscount--;
 
         UpdateUI();
