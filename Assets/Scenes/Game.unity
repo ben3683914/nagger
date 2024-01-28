@@ -1040,7 +1040,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2471,7 +2471,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4442,11 +4442,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6433f25e771fa4fbbed758d5a7aa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NSFW: 0
   SpinManager: {fileID: 594764390}
   CameraManager: {fileID: 460561291}
   GuessManager: {fileID: 224482531}
   LadderManager: {fileID: 1707972475}
+  NSFW: 0
 --- !u!4 &1716818252
 Transform:
   m_ObjectHideFlags: 0
