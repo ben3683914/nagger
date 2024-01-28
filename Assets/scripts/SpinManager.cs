@@ -1,29 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SpinManager : MonoBehaviour
 {
+    public UnityEvent<int> OnNeedleHit;
     public GameObject spinner;
     public Button button;
+    public Needle needle;
 
     float rotSpeed = 2f;
-    float[]durationRange = {1.5f, 5f};
+    float[] durationRange = {1.5f, 5f};
     float duration;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void Spin()
     {
-        Debug.Log("spinning");
+        //Debug.Log("spinning");
 
         duration = Random.Range(durationRange[0], durationRange[1]);
-        Debug.Log($"duration: {duration}");
+        //Debug.Log($"duration: {duration}");
         StartCoroutine(Spin(duration));
     }
 
@@ -39,8 +36,17 @@ public class SpinManager : MonoBehaviour
             yield return null;
         }
 
+        NeedleCheck();
+
         button.interactable = true;
 
         yield return null;
+    }
+
+    public int NeedleCheck()
+    {
+        var hints = needle.GetNeedleHints();
+        OnNeedleHit.Invoke(hints);
+        return hints;
     }
 }
