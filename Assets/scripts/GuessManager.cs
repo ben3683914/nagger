@@ -116,36 +116,48 @@ public class GuessManager : MonoBehaviour
         var rand = new System.Random();
 
         NormalPhrases = new List<Phrase> {
-            new Phrase("Fictional Characters","NICK FURY"),
-            new Phrase("Fictional Characters","HOMER SIMPSON"),
-            new Phrase("Fictional Characters","THE INCREDIBLE HULK"),
-            new Phrase("Around The House","ADDRESS BOOK"),
-            new Phrase("Around The House","ELECTRIC TOOTHBRUSH"),
-            new Phrase("Around The House","PROFICIENTLY DISPLAYED AWARDS"),
-            new Phrase("Event","COMIC BOOK CONVENTION"),
-            new Phrase("Event","SUMMER VACATION"),
-            new Phrase("Event","INDEPENDENCE DAY"),
-            new Phrase("Food & Drink","AMERICAN CHEDDAR CHEESE"),
-            new Phrase("Food & Drink","EAR OF CORN"),
-            new Phrase("Food & Drink","LEMON POPPY SEED MUFFINS"),
-            new Phrase("Occupation","BRAIN SURGEON"),
-            new Phrase("Occupation","WEBMASTER"),
-            new Phrase("Occupation","PERSONAL TRAINER"),
-            new Phrase("Person","ALTAR BOY"),
-            new Phrase("Person","FBI AGENT"),
-            new Phrase("Person","SCHOOL COUNSELOR"),
-            new Phrase("Phrase","AHEAD OF THE GAME"),
-            new Phrase("Phrase","HAVING A GREEN THUMB"),
-            new Phrase("Phrase","ONCE IN A BLUE MOON"),
-            new Phrase("On The Map","PARK AVENUE"),
-            new Phrase("On The Map","BRITISH COLUMBIA"),
-            new Phrase("On The Map","LOUISVILLE KENTUCKY")
+            new Phrase("Fictional Characters","NICK FURY", 1),
+            new Phrase("Fictional Characters","HOMER SIMPSON", 0),
+            new Phrase("Fictional Characters","THE INCREDIBLE HULK", 1),
+            new Phrase("Around The House","ADDRESS BOOK", 0),
+            new Phrase("Around The House","ELECTRIC TOOTHBRUSH", 1),
+            new Phrase("Around The House","PROFICIENTLY DISPLAYED AWARDS", 1),
+            new Phrase("Event","COMIC BOOK CONVENTION", 1),
+            new Phrase("Event","SUMMER VACATION", 0),
+            new Phrase("Event","INDEPENDENCE DAY", 0),
+            new Phrase("Food & Drink","AMERICAN CHEDDAR CHEESE", 1),
+            new Phrase("Food & Drink","EAR OF CORN", 0),
+            new Phrase("Food & Drink","LEMON POPPY SEED MUFFINS", 1),
+            new Phrase("Occupation","BRAIN SURGEON", 0),
+            new Phrase("Occupation","WEBMASTER", 1),
+            new Phrase("Occupation","PERSONAL TRAINER", 0),
+            new Phrase("Occupation","FBI AGENT", 0),
+            new Phrase("Occupation","SCHOOL COUNSELOR", 1),
+            new Phrase("Person","ALTAR BOY", 0),
+            new Phrase("Person", "MORGAN FREEMAN", 1),
+            new Phrase("Person", "DONALD TRUMP", 0),
+            new Phrase("Person", "BARACK OBAMA", 0),
+            new Phrase("Person","TAYLOR SWIFT", 0),
+            new Phrase("Phrase","AHEAD OF THE GAME", 1),
+            new Phrase("Phrase","HAVING A GREEN THUMB", 2),
+            new Phrase("Phrase","ONCE IN A BLUE MOON", 2),
+            new Phrase("On The Map","PARK AVENUE", 1),
+            new Phrase("On The Map","BRITISH COLUMBIA", 1),
+            new Phrase("On The Map","LOUISVILLE KENTUCKY", 1),
+            new Phrase("New Slang", "No Cap", 1),
+            new Phrase("New Slang", "On God", 1),
+            new Phrase("Dance", "SALSA", 0),
+            new Phrase("Dance", "THE JITTERBUG", 1),
+            new Phrase("Dance", "THE GRIDDIE",1),
+            new Phrase("Video Game", "MINECRAFT", 0),
+            new Phrase("Video Game", "CALL OF DUTY", 0),
+            new Phrase("Video Game", "AMONG US", 1)
         };
 
 
         SusPhrases = new List<Phrase> {
-            new Phrase("People That Annoy You","NAGGERS"),
-            new Phrase("Things That Gross You Out","LOUISVILLE KENTUCKY")
+            new Phrase("People That Annoy You","NAGGERS", 1),
+            new Phrase("Things That Gross You Out","LOUISVILLE KENTUCKY", 0) // lmao?
         };
 
         NormalPhrases = NormalPhrases.OrderBy(_ => rand.Next()).ToList();
