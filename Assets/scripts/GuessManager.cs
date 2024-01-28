@@ -18,7 +18,6 @@ public class GuessManager : MonoBehaviour
     public Phrase phrase;
     public int guesscount = 0;
     private List<Phrase> Phrases;
-    private List<Phrase> SusPhrases;
     public TMP_Dropdown GuessDropdown;
     public UnityEngine.UI.Button Button;
     public TMP_Text GuessText;
@@ -56,11 +55,13 @@ public class GuessManager : MonoBehaviour
     // call on enter to state
     public void StartPhrase(int tier)
     {
+        guessList = null;
         setPhrase(0);
         AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
         RSTLNE();
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
         UpdateUI();
+        Debug.Log($"Answer: {phrase.Answer}");
     }
 
     public void AddGuesses(int guesses)
@@ -91,9 +92,12 @@ public class GuessManager : MonoBehaviour
             }
             AnswerText.text = answerString.ToString();
         }
+        
+        //Debug.Log($"Guess String: {AnswerText.text}");
 
-        if(phrase.Answer == AnswerText.ToString())
+        if (phrase.Answer.ToUpper() == AnswerText.text.ToUpper())
         {
+            Debug.Log("Advance");
             GameManager.Instance.LadderManager.NextPhrase();
             return;
         }
@@ -136,11 +140,12 @@ public class GuessManager : MonoBehaviour
         phrase = GetNextPhrase(type, tier);
         
         phrase.Answer = phrase.Answer.ToUpper();
-        PromptText.text = phrase.Prompt; // i can't find the gameobject for this
+        PromptText.text = phrase.Prompt;
     }
 
     private Phrase GetNextPhrase(Phrase.PhraseType type, int tier)
     {
+        Shuffle();
         Phrase phrase;
         if(type == Phrase.PhraseType.Safe)
         {
@@ -153,10 +158,14 @@ public class GuessManager : MonoBehaviour
         return phrase;
     }
 
-    private void InitializePhrases()
+    private void Shuffle()
     {
         var rand = new System.Random();
+        Phrases = Phrases.OrderBy(_ => rand.Next()).ToList();
+    }
 
+    private void InitializePhrases()
+    {
         Phrases = new List<Phrase> {
             new Phrase("Fictional Characters","NICK FURY", 1),
             new Phrase("Fictional Characters","HOMER SIMPSON", 0),
@@ -202,7 +211,5 @@ public class GuessManager : MonoBehaviour
             new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus),
             new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus)
         };
-
-        Phrases = Phrases.OrderBy(_ => rand.Next()).ToList();
     }
 }

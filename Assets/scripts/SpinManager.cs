@@ -67,7 +67,7 @@ public class SpinManager : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         GameManager.Instance.GameState.ChangeState(new BoardState());
     }
 

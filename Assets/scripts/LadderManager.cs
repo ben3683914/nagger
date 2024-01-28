@@ -11,7 +11,7 @@ public class LadderManager : MonoBehaviour
 
     public int Tiers = 2;
     public int CurrentTier = 0;
-    public int CurrentTierPhrase = 0;
+    public int CurrentTierIndex = 0;
     
     public List<Phrase.PhraseType> TierPhrases;
 
@@ -22,32 +22,35 @@ public class LadderManager : MonoBehaviour
 
     public void NextPhrase()
     {
-        if (CurrentTierPhrase >= TierPhrases.Count)
+        if (CurrentTierIndex >= TierPhrases.Count-1)
         {
             NextTier();
-            return;
+        }
+        else
+        {
+            CurrentTierIndex++;
         }
 
-        CurrentTierPhrase++;
+        GameManager.Instance.GameState.ChangeState(new SpinnerState());
         OnNextPhrase.Invoke(CurrentTier);
     }
 
     public void NextTier()
     {
+        CurrentTier++;
+        CurrentTierIndex = 0;
+
         if (CurrentTier >= Tiers)
         {
-            GameManager.Instance.Win();
+            GameManager.Instance.GameState.ChangeState(new WinState());
             return;
         }
 
-        CurrentTier++;
-        CurrentTierPhrase = 0;
-
-        OnNextTier.Invoke(CurrentTier, CurrentTierPhrase);
+        OnNextTier.Invoke(CurrentTier, CurrentTierIndex);
     }
 
     public Phrase.PhraseType GetCurrentPhraseType()
     {
-        return TierPhrases[CurrentTierPhrase];
+        return TierPhrases[CurrentTierIndex];
     }
 }

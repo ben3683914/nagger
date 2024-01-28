@@ -14,6 +14,9 @@ public class BoardState : IState
         guessManager = GameManager.Instance.GuessManager;
         ladderManager = GameManager.Instance.LadderManager;
 
+        Debug.Log($"Current Tier: {ladderManager.CurrentTier}");
+        Debug.Log($"Current Tier Index: {ladderManager.CurrentTierIndex}");
+
         guessManager.StartPhrase(ladderManager.CurrentTier);
     }
 

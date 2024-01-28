@@ -66,14 +66,4 @@ public class CameraManager : MonoBehaviour
             default: return new SpinnerState();
         }
     }
-
-    void SetSpinnerCamera()
-    {
-        SetCamera(Cams.Spinner);
-    }
-
-    void SetBoardCamera()
-    {
-        SetCamera(Cams.Board);
-    }
 }
