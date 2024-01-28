@@ -58,6 +58,7 @@ public class GuessManager : MonoBehaviour
     {
         setPhrase(0);
         AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
+        RSTLNE();
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
         UpdateUI();
     }
@@ -69,20 +70,36 @@ public class GuessManager : MonoBehaviour
         UpdateUI();
     }
 
+    public void RSTLNE()
+    {
+        DoGuess('R');
+        DoGuess('S');
+        DoGuess('T');
+        DoGuess('L');
+        DoGuess('N');
+        DoGuess('E');
+    }
+
+    public void DoGuess(char letter)
+    {
+        if (phrase.Answer.Contains(letter))
+        {
+            var answerString = new StringBuilder(AnswerText.text);
+            for (int i = 0; i < phrase.Answer.Length; i++)
+            {
+                answerString[i] = phrase.Answer[i] == letter ? phrase.Answer[i] : answerString[i];
+            }
+            AnswerText.text = answerString.ToString();
+        }
+    }
+
     public void Guess()
     {
         Button.interactable = false;
         var guessLetter = GuessDropdown.options[GuessDropdown.value].text[0];
 
-        if (phrase.Answer.Contains(guessLetter))
-        {
-            var answerString = new StringBuilder(AnswerText.text);
-            for (int i = 0; i < phrase.Answer.Length; i++)
-            {
-                answerString[i] = phrase.Answer[i] == guessLetter ? phrase.Answer[i] : answerString[i];
-            }
-            AnswerText.text = answerString.ToString();
-        }
+        DoGuess(guessLetter);
+        
         guessList = guessList.Where(x => x != guessLetter).ToArray();
 
         guesscount--;
