@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
+using Unity.VisualScripting;
 
 public class GuessManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GuessManager : MonoBehaviour
     public TMP_Text GuessText;
     public TMP_Text AnswerText;
     public TMP_Text PromptText;
+    public UnityEngine.UI.Image Image;
 
     public char[] guessList
     {
@@ -62,6 +64,7 @@ public class GuessManager : MonoBehaviour
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
         UpdateUI();
         Debug.Log($"Answer: {phrase.Answer}");
+        UpdateImage();
     }
 
     public void AddGuesses(int guesses)
@@ -131,6 +134,22 @@ public class GuessManager : MonoBehaviour
 
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
 
+    }
+
+    private void UpdateImage()
+    {
+
+        var sprite = Image.GetComponent<UnityEngine.UI.Image>();
+
+        if (phrase.SpriteName != null)
+        {
+            sprite.gameObject.SetActive(true);
+            sprite.sprite = GameManager.Instance.SpriteManager.Sprites[phrase.SpriteName];
+        }
+        else
+        {
+            sprite.gameObject.SetActive(false);
+        }
     }
 
     private void setPhrase(int index)
@@ -208,8 +227,8 @@ public class GuessManager : MonoBehaviour
             new Phrase("CITY", "CHICAGO", 0),
             new Phrase("CITY", "ATLANTA", 0),
             new Phrase("CITY", "LOS ANGELES", 1),
-            new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus),
-            new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus)
+            new Phrase("People That Annoy You","NAGGERS", 1, Phrase.PhraseType.Sus, "Nagger"),
+            new Phrase("Things That Gross You Out","MAGGOTS", 0, Phrase.PhraseType.Sus, "Maggots")
         };
     }
 }

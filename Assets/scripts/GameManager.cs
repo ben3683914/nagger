@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GuessManager GuessManager;
     public LadderManager LadderManager;
     public GameState GameState;
+    public SpriteManager SpriteManager;
     public bool NSFW;
 
     private void Awake()
