@@ -57,7 +57,6 @@ public class GuessManager : MonoBehaviour
     public void StartPhrase(int tier)
     {
         setPhrase(0);
-        guessList = _guessList;
         AnswerText.text = Regex.Replace(phrase.Answer, @"\w", "#");
         GuessDropdown.options = _guessList.Select(x => new TMP_Dropdown.OptionData { text = x.ToString() }).ToList();
         UpdateUI();
@@ -95,6 +94,7 @@ public class GuessManager : MonoBehaviour
 
     private void UpdateUI()
     {
+        guessList = _guessList;
         var enableUI = guesscount > 0;
         GuessText.text = $"Guesses Left: {guesscount}";
 

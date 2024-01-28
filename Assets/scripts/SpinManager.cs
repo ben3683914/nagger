@@ -65,10 +65,17 @@ public class SpinManager : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);
+        GameManager.Instance.GameState.ChangeState(new BoardState());
+    }
+
     public int NeedleCheck()
     {
         var hints = needle.GetNeedleHints();
         OnNeedleHit.Invoke(hints);
+        StartCoroutine(Wait());
         return hints;
     }
 }
