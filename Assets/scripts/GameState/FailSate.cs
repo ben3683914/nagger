@@ -11,7 +11,7 @@ public class FailState : IState
         gm = GameManager.Instance;
         Debug.Log("entered fail state");
         gm.CameraManager.SetCamera(CameraManager.Cams.Fail);
-
+        
     }
 
     public void Execute()

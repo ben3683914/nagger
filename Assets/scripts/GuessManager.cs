@@ -84,10 +84,12 @@ public class GuessManager : MonoBehaviour
         DoGuess('E');
     }
 
-    public void DoGuess(char letter)
+    public bool DoGuess(char letter)
     {
+        bool good = false;
         if (phrase.Answer.Contains(letter))
         {
+            good = true;
             var answerString = new StringBuilder(AnswerText.text);
             for (int i = 0; i < phrase.Answer.Length; i++)
             {
@@ -110,11 +112,10 @@ public class GuessManager : MonoBehaviour
                 Debug.Log("Advance");
                 GameManager.Instance.GameState.ChangeState(new SuccessState());
             }
-            
-            return;
         }
 
         guessList = guessList.Where(x => x != letter).ToArray();
+        return good;
     }
 
     public void Guess()
@@ -122,9 +123,10 @@ public class GuessManager : MonoBehaviour
         Button.interactable = false;
         var guessLetter = GuessDropdown.options[GuessDropdown.value].text[0];
 
-        DoGuess(guessLetter);
+        var good = DoGuess(guessLetter);
         
-        guesscount--;
+        if(!good)
+            guesscount--;
 
         if(guesscount == 0)
         {
