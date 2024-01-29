@@ -11,9 +11,6 @@ public class fail : MonoBehaviour
         var audio = GetComponent<AudioSource>();
         audio.Play();
 
-        if (GameManager.Instance.NSFW)
-        {
-            text.text = "You Failed.\r\nLike a real nagger.";
-        }
+        
     }
 }
